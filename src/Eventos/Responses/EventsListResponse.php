@@ -1,14 +1,14 @@
 <?php
 
-namespace SaveColombia\AllegraApiPsr\Eventos\Responses;
+namespace SaveColombia\AlegraApiPsr\Eventos\Responses;
 
 use DateTimeInterface;
-use SaveColombia\AllegraApiPsr\Eventos\DataTypes\Error;
-use SaveColombia\AllegraApiPsr\Eventos\DataTypes\EventListEvent;
-use SaveColombia\AllegraApiPsr\Eventos\DataTypes\EventStatus;
-use SaveColombia\AllegraApiPsr\Eventos\DataTypes\EventType;
-use SaveColombia\AllegraApiPsr\Eventos\DataTypes\LegalStatus;
-use SaveColombia\AllegraApiPsr\Eventos\DataTypes\Receiver;
+use SaveColombia\AlegraApiPsr\Eventos\DataTypes\Error;
+use SaveColombia\AlegraApiPsr\Eventos\DataTypes\EventListEvent;
+use SaveColombia\AlegraApiPsr\Eventos\DataTypes\EventStatus;
+use SaveColombia\AlegraApiPsr\Eventos\DataTypes\EventType;
+use SaveColombia\AlegraApiPsr\Eventos\DataTypes\LegalStatus;
+use SaveColombia\AlegraApiPsr\Eventos\DataTypes\Receiver;
 
 final class EventsListResponse
 {

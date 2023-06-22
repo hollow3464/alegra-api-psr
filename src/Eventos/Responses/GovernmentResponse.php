@@ -1,6 +1,6 @@
 <?php
 
-namespace SaveColombia\AllegraApiPsr\Eventos\Responses;
+namespace SaveColombia\AlegraApiPsr\Eventos\Responses;
 
 final class GovernmentResponse
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace SaveColombia\AllegraApiPsr\Exceptions;
+namespace SaveColombia\AlegraApiPsr\Exceptions;
 
 use Exception;
-use SaveColombia\AllegraApiPsr\Eventos\Responses\FailedRequestResponse;
+use SaveColombia\AlegraApiPsr\Eventos\Responses\FailedRequestResponse;
 
 final class FailedRequestException extends Exception
 {

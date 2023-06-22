@@ -1,6 +1,6 @@
 <?php
 
-namespace SaveColombia\AllegraApiPsr\Eventos;
+namespace SaveColombia\AlegraApiPsr\Eventos;
 
 use CuyZ\Valinor\MapperBuilder;
 use Psr\Http\Client\ClientInterface;
@@ -9,18 +9,18 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
-use SaveColombia\AllegraApiPsr\Eventos\DataTypes\TipoArchivoEvento;
-use SaveColombia\AllegraApiPsr\Eventos\Payloads\EventoDian;
-use SaveColombia\AllegraApiPsr\Eventos\Payloads\EventoDianAttachedDocument;
-use SaveColombia\AllegraApiPsr\Eventos\Responses\EventEmittedResponse;
-use SaveColombia\AllegraApiPsr\Eventos\Responses\EventsListResponse;
-use SaveColombia\AllegraApiPsr\Eventos\Responses\FailedRequestResponse;
-use SaveColombia\AllegraApiPsr\Eventos\Responses\FileResponse;
-use SaveColombia\AllegraApiPsr\Eventos\Responses\ResourceNotFoundResponse;
-use SaveColombia\AllegraApiPsr\Eventos\Responses\ServerCommunicationErrorResponse;
-use SaveColombia\AllegraApiPsr\Eventos\Responses\ServerErrorResponse;
-use SaveColombia\AllegraApiPsr\Eventos\Responses\ValidationErrorResponse;
-use SaveColombia\AllegraApiPsr\Exceptions\FailedRequestException;
+use SaveColombia\AlegraApiPsr\Eventos\DataTypes\TipoArchivoEvento;
+use SaveColombia\AlegraApiPsr\Eventos\Payloads\EventoDian;
+use SaveColombia\AlegraApiPsr\Eventos\Payloads\EventoDianAttachedDocument;
+use SaveColombia\AlegraApiPsr\Eventos\Responses\EventEmittedResponse;
+use SaveColombia\AlegraApiPsr\Eventos\Responses\EventsListResponse;
+use SaveColombia\AlegraApiPsr\Eventos\Responses\FailedRequestResponse;
+use SaveColombia\AlegraApiPsr\Eventos\Responses\FileResponse;
+use SaveColombia\AlegraApiPsr\Eventos\Responses\ResourceNotFoundResponse;
+use SaveColombia\AlegraApiPsr\Eventos\Responses\ServerCommunicationErrorResponse;
+use SaveColombia\AlegraApiPsr\Eventos\Responses\ServerErrorResponse;
+use SaveColombia\AlegraApiPsr\Eventos\Responses\ValidationErrorResponse;
+use SaveColombia\AlegraApiPsr\Exceptions\FailedRequestException;
 
 final class GestorEventos
 {

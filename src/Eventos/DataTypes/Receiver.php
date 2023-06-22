@@ -1,6 +1,6 @@
 <?php
 
-namespace SaveColombia\AllegraApiPsr\Eventos\DataTypes;
+namespace SaveColombia\AlegraApiPsr\Eventos\DataTypes;
 
 final class Receiver
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace SaveColombia\AllegraApiPsr\Eventos\Responses;
+namespace SaveColombia\AlegraApiPsr\Eventos\Responses;
 
-use SaveColombia\AllegraApiPsr\Eventos\DataTypes\File;
+use SaveColombia\AlegraApiPsr\Eventos\DataTypes\File;
 
 final class FileResponse
 {

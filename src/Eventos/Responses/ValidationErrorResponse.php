@@ -1,8 +1,8 @@
 <?php
 
-namespace SaveColombia\AllegraApiPsr\Eventos\Responses;
+namespace SaveColombia\AlegraApiPsr\Eventos\Responses;
 
-use SaveColombia\AllegraApiPsr\Eventos\DataTypes\Error;
+use SaveColombia\AlegraApiPsr\Eventos\DataTypes\Error;
 
 final class ValidationErrorResponse implements FailedRequestResponse
 {
