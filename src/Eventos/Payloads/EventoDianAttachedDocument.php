@@ -33,7 +33,7 @@ final class EventoDianAttachedDocument implements JsonSerializable
             && !$issuerParty
         ) {
             throw new \InvalidArgumentException(
-                "Es requerido en los eventos Recibo de Factura y Recibo de bienes y/o servicios"
+                "El Issuer Party es requerido en los eventos Recibo de Factura y Recibo de bienes y/o servicios"
             );
         }
     }
