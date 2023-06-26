@@ -73,6 +73,7 @@ final class GestorEventos
             $this->requestFactory
                 ->createRequest('POST', $this->setupPath('events'))
                 ->withBody($this->streamFactory->createStream($payload))
+                ->withHeader('Content-type', 'application/json')
         );
 
         $res = $this->clientInterface->sendRequest($req);
@@ -108,6 +109,7 @@ final class GestorEventos
             $this->requestFactory
                 ->createRequest('POST', $this->setupPath('events/from-xml'))
                 ->withBody($this->streamFactory->createStream($payload))
+                ->withHeader('Content-type', 'application/json')
         );
 
         $res = $this->clientInterface->sendRequest($req);
@@ -138,7 +140,7 @@ final class GestorEventos
 
         $req = $this->addAuthToken(
             $this->requestFactory
-                ->createRequest('POST', $this->setupPath("events/{$id}"))
+                ->createRequest('GET', $this->setupPath("events/{$id}"))
         );
 
         $res = $this->clientInterface->sendRequest($req);
@@ -169,7 +171,7 @@ final class GestorEventos
 
         $req = $this->addAuthToken(
             $this->requestFactory
-                ->createRequest('POST', $this->setupPath("events/{$id}/files/{$tipo->value}"))
+                ->createRequest('GET', $this->setupPath("events/{$id}/files/{$tipo->value}"))
         );
 
         $res = $this->clientInterface->sendRequest($req);
@@ -200,7 +202,7 @@ final class GestorEventos
 
         $req = $this->addAuthToken(
             $this->requestFactory
-                ->createRequest('POST', $this->setupPath("events/invoice/{$cufe}"))
+                ->createRequest('GET', $this->setupPath("events/invoice/{$cufe}"))
         );
 
         $res = $this->clientInterface->sendRequest($req);
