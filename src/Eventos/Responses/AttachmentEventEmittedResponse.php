@@ -8,7 +8,7 @@ use SaveColombia\AlegraApiPsr\Eventos\DataTypes\EventType;
 use SaveColombia\AlegraApiPsr\Eventos\DataTypes\LegalStatus;
 use SaveColombia\AlegraApiPsr\Eventos\DataTypes\Receiver;
 
-final class EventEmittedResponse
+final class AttachmentEventEmittedResponse
 {
     public function __construct(
         public readonly string $id,
@@ -19,13 +19,13 @@ final class EventEmittedResponse
         public readonly string $cude,
         public readonly string $associatedDocumentId,
         public readonly Receiver $receiver,
-        public readonly string $prefix,
         public readonly string $number,
         public readonly string $fullNumber,
         public readonly GovernmentResponse $governmentResponse,
         public readonly string $xmlFileName,
-        public readonly string $pdfFileName,
+        public readonly string $zipFileName,
         public readonly EventStatus $status,
+        public readonly ?string $prefix = null,
     ) {
     }
 }

@@ -12,6 +12,7 @@ use Psr\Http\Message\UriInterface;
 use SaveColombia\AlegraApiPsr\Eventos\DataTypes\TipoArchivoEvento;
 use SaveColombia\AlegraApiPsr\Eventos\Payloads\EventoDian;
 use SaveColombia\AlegraApiPsr\Eventos\Payloads\EventoDianAttachedDocument;
+use SaveColombia\AlegraApiPsr\Eventos\Responses\AttachmentEventEmittedResponse;
 use SaveColombia\AlegraApiPsr\Eventos\Responses\EventEmittedResponse;
 use SaveColombia\AlegraApiPsr\Eventos\Responses\EventsListResponse;
 use SaveColombia\AlegraApiPsr\Eventos\Responses\FailedRequestResponse;
@@ -97,7 +98,7 @@ final class GestorEventos
 
     public function emitirEventoFacturaElectronicaAttachedDocument(
         EventoDianAttachedDocument $evento
-    ): EventEmittedResponse {
+    ): AttachmentEventEmittedResponse {
         $payload = (string) json_encode($evento, JSON_THROW_ON_ERROR);
 
         $mapper = $this->mapperBuilder
@@ -117,7 +118,7 @@ final class GestorEventos
         $body = json_decode($res->getBody(), true, flags: JSON_THROW_ON_ERROR);
 
         $response = match ($res->getStatusCode()) {
-            200     => $mapper->map(EventEmittedResponse::class, $body),
+            200,201     => $mapper->map(AttachmentEventEmittedResponse::class, $body),
             400     => $mapper->map(ValidationErrorResponse::class, $body),
             404     => $mapper->map(ResourceNotFoundResponse::class, $body),
             500     => $mapper->map(ServerErrorResponse::class, $body),
@@ -148,7 +149,7 @@ final class GestorEventos
         $body = json_decode($res->getBody(), true, flags: JSON_THROW_ON_ERROR);
 
         $response = match ($res->getStatusCode()) {
-            200     => $mapper->map(EventEmittedResponse::class, $body),
+            200, 201     => $mapper->map(EventEmittedResponse::class, $body),
             400     => $mapper->map(ValidationErrorResponse::class, $body),
             404     => $mapper->map(ResourceNotFoundResponse::class, $body),
             500     => $mapper->map(ServerErrorResponse::class, $body),
@@ -179,7 +180,7 @@ final class GestorEventos
         $body = json_decode($res->getBody(), true, flags: JSON_THROW_ON_ERROR);
 
         $response = match ($res->getStatusCode()) {
-            200     => $mapper->map(FileResponse::class, $body),
+            200, 201     => $mapper->map(FileResponse::class, $body),
             400     => $mapper->map(ValidationErrorResponse::class, $body),
             404     => $mapper->map(ResourceNotFoundResponse::class, $body),
             500     => $mapper->map(ServerErrorResponse::class, $body),
