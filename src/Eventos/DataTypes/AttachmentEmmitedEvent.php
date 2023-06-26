@@ -16,11 +16,11 @@ final class AttachmentEmmitedEvent
         public readonly string $associatedDocumentId,
         public readonly Receiver $receiver,
         public readonly string $number,
-        public readonly string $fullNumber,
         public readonly GovernmentResponse $governmentResponse,
         public readonly string $xmlFileName,
         public readonly string $zipFileName,
         public readonly EventStatus $status,
+        public readonly ?string $fullNumber = null,
         public readonly ?string $prefix = null,
     ) {
     }
