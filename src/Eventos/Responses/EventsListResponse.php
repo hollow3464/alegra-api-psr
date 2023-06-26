@@ -7,6 +7,7 @@ use SaveColombia\AlegraApiPsr\Eventos\DataTypes\AlegraError;
 use SaveColombia\AlegraApiPsr\Eventos\DataTypes\EventListEvent;
 use SaveColombia\AlegraApiPsr\Eventos\DataTypes\EventStatus;
 use SaveColombia\AlegraApiPsr\Eventos\DataTypes\EventType;
+use SaveColombia\AlegraApiPsr\Eventos\DataTypes\GovernmentResponse;
 use SaveColombia\AlegraApiPsr\Eventos\DataTypes\LegalStatus;
 use SaveColombia\AlegraApiPsr\Eventos\DataTypes\Receiver;
 
