@@ -3,7 +3,7 @@
 namespace SaveColombia\AlegraApiPsr\Eventos\Responses;
 
 use DateTimeInterface;
-use SaveColombia\AlegraApiPsr\Eventos\DataTypes\Error;
+use SaveColombia\AlegraApiPsr\Eventos\DataTypes\AlegraError;
 use SaveColombia\AlegraApiPsr\Eventos\DataTypes\EventListEvent;
 use SaveColombia\AlegraApiPsr\Eventos\DataTypes\EventStatus;
 use SaveColombia\AlegraApiPsr\Eventos\DataTypes\EventType;
@@ -13,7 +13,7 @@ use SaveColombia\AlegraApiPsr\Eventos\DataTypes\Receiver;
 final class EventsListResponse
 {
     /**
-     * @param array<Error> $errorMessages
+     * @param array<AlegraError> $errorMessages
      * @param array<EventListEvent> $events
      */
     public function __construct(

@@ -2,7 +2,7 @@
 
 namespace SaveColombia\AlegraApiPsr\Eventos\DataTypes;
 
-final class Error
+final class AlegraError
 {
     public function __construct(
         public readonly string $code,
