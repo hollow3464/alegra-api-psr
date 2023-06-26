@@ -77,7 +77,7 @@ final class GestorEventos
 
         $res = $this->clientInterface->sendRequest($req);
 
-        $body = json_decode($res->getBody(), flags: JSON_THROW_ON_ERROR);
+        $body = json_decode($res->getBody(), true, flags: JSON_THROW_ON_ERROR);
 
         $response = match ($res->getStatusCode()) {
             200     => $mapper->map(EventEmittedResponse::class, $body),
@@ -112,7 +112,7 @@ final class GestorEventos
 
         $res = $this->clientInterface->sendRequest($req);
 
-        $body = json_decode($res->getBody(), flags: JSON_THROW_ON_ERROR);
+        $body = json_decode($res->getBody(), true, flags: JSON_THROW_ON_ERROR);
 
         $response = match ($res->getStatusCode()) {
             200     => $mapper->map(EventEmittedResponse::class, $body),
@@ -143,7 +143,7 @@ final class GestorEventos
 
         $res = $this->clientInterface->sendRequest($req);
 
-        $body = json_decode($res->getBody(), flags: JSON_THROW_ON_ERROR);
+        $body = json_decode($res->getBody(), true, flags: JSON_THROW_ON_ERROR);
 
         $response = match ($res->getStatusCode()) {
             200     => $mapper->map(EventEmittedResponse::class, $body),
@@ -174,7 +174,7 @@ final class GestorEventos
 
         $res = $this->clientInterface->sendRequest($req);
 
-        $body = json_decode($res->getBody(), flags: JSON_THROW_ON_ERROR);
+        $body = json_decode($res->getBody(), true, flags: JSON_THROW_ON_ERROR);
 
         $response = match ($res->getStatusCode()) {
             200     => $mapper->map(FileResponse::class, $body),
@@ -205,7 +205,7 @@ final class GestorEventos
 
         $res = $this->clientInterface->sendRequest($req);
 
-        $body = json_decode($res->getBody(), flags: JSON_THROW_ON_ERROR);
+        $body = json_decode($res->getBody(), true, flags: JSON_THROW_ON_ERROR);
 
         $response = match ($res->getStatusCode()) {
             200     => $mapper->map(EventsListResponse::class, $body),
