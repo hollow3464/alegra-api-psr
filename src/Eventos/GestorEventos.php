@@ -106,7 +106,7 @@ final class GestorEventos
 
         $req = $this->addAuthToken(
             $this->requestFactory
-                ->createRequest('POST', $this->setupPath('events'))
+                ->createRequest('POST', $this->setupPath('events/from-xml'))
                 ->withBody($this->streamFactory->createStream($payload))
         );
 
