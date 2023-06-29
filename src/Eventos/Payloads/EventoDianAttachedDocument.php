@@ -4,8 +4,8 @@ namespace SaveColombia\AlegraApiPsr\Eventos\Payloads;
 
 use JsonSerializable;
 use SaveColombia\AlegraApiPsr\Eventos\DataTypes\ClaimCode;
-use SaveColombia\AlegraApiPsr\Eventos\DataTypes\Company;
 use SaveColombia\AlegraApiPsr\Eventos\DataTypes\Email;
+use SaveColombia\AlegraApiPsr\Eventos\DataTypes\EventCompany;
 use SaveColombia\AlegraApiPsr\Eventos\DataTypes\IssuerParty;
 use SaveColombia\AlegraApiPsr\Eventos\DataTypes\TipoEventoDian;
 
@@ -16,7 +16,7 @@ final class EventoDianAttachedDocument implements JsonSerializable
         public readonly TipoEventoDian $type,
         public readonly string $xmlContent,
         public readonly ?IssuerParty $issuerParty = null,
-        public readonly ?Company $company = null,
+        public readonly ?EventCompany $company = null,
         public readonly ?ClaimCode $claimCode = null,
         public readonly ?Email $email = null
     ) {
@@ -51,7 +51,7 @@ final class EventoDianAttachedDocument implements JsonSerializable
         }
 
         if ($this->company) {
-            $self['company'] = $this->company->jsonSerialize();
+            $self['company'] = $this->company;
         }
 
         if ($this->claimCode) {

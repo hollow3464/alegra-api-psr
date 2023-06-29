@@ -118,7 +118,7 @@ final class GestorEventos
         $body = json_decode($res->getBody(), true, flags: JSON_THROW_ON_ERROR);
 
         $response = match ($res->getStatusCode()) {
-            200,201 => $mapper->map(AttachmentEventEmittedResponse::class, $body),
+            200, 201 => $mapper->map(AttachmentEventEmittedResponse::class, $body),
             400     => $mapper->map(ValidationErrorResponse::class, $body),
             404     => $mapper->map(ResourceNotFoundResponse::class, $body),
             500     => $mapper->map(ServerErrorResponse::class, $body),
