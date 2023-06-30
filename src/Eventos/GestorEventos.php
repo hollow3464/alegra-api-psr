@@ -9,6 +9,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
+use Psr\Log\LoggerInterface;
 use SaveColombia\AlegraApiPsr\Eventos\DataTypes\TipoArchivoEvento;
 use SaveColombia\AlegraApiPsr\Eventos\Payloads\EventoDian;
 use SaveColombia\AlegraApiPsr\Eventos\Payloads\EventoDianAttachedDocument;
@@ -35,6 +36,7 @@ final class GestorEventos
         private readonly UriFactoryInterface $uriFactory,
         private readonly StreamFactoryInterface $streamFactory,
         private readonly MapperBuilder $mapperBuilder,
+        private readonly ?LoggerInterface $logger = null,
         private readonly string $token = '',
         bool $testing = true,
     ) {
@@ -88,10 +90,38 @@ final class GestorEventos
             404     => $mapper->map(ResourceNotFoundResponse::class, $body),
             500     => $mapper->map(ServerErrorResponse::class, $body),
             401     => $mapper->map(ForbiddenErrorResponse::class, $body),
-            default => throw new \Exception("Se recibió un estado desconocido desde la API", 1)
+            default => null
         };
 
+        if (!$response) {
+            if ($this->logger) {
+                $this->logger->warning(
+                    'Envio de evento a la DIAN fallido',
+                    [
+                        'endpoint'      => '/events',
+                        'response_body' => $body,
+                        'response_code' => $res->getStatusCode(),
+                        'payload'       => $payload
+                    ]
+                );
+            }
+
+            throw new \Exception("Se recibió un estado desconocido desde la API DIAN");
+        }
+
         if ($response instanceof FailedRequestResponse) {
+            if ($this->logger) {
+                $this->logger->warning(
+                    'Envio de evento a la DIAN fallido',
+                    [
+                        'endpoint'      => '/events',
+                        'response_body' => $body,
+                        'response_code' => $res->getStatusCode(),
+                        'payload'       => $payload
+                    ]
+                );
+            }
+
             throw new FailedRequestException($response);
         }
 
@@ -125,10 +155,39 @@ final class GestorEventos
             404     => $mapper->map(ResourceNotFoundResponse::class, $body),
             500     => $mapper->map(ServerErrorResponse::class, $body),
             401     => $mapper->map(ForbiddenErrorResponse::class, $body),
-            default => throw new \Exception("Se recibió un estado desconocido desde la API", 1)
+            default => null
         };
 
+        if (!$response) {
+            if ($this->logger) {
+                $this->logger->warning(
+                    'Envio de evento a la DIAN fallido',
+                    [
+                        'endpoint'      => '/events/from-xml',
+                        'response_body' => $body,
+                        'response_code' => $res->getStatusCode(),
+                        'payload'       => $payload
+                    ]
+                );
+            }
+
+            throw new \Exception("Se recibió un estado desconocido desde la API DIAN");
+        }
+
         if ($response instanceof FailedRequestResponse) {
+            if ($this->logger) {
+                $this->logger->warning(
+                    'Envio de evento a la DIAN fallido',
+                    [
+                        'endpoint'      => '/events/from-xml',
+                        'response_body' => $body,
+                        'response_code' => $res->getStatusCode(),
+                        'payload'       => $payload
+
+                    ]
+                );
+            }
+
             throw new FailedRequestException($response);
         }
 
