@@ -17,6 +17,7 @@ use SaveColombia\AlegraApiPsr\Eventos\Responses\EventEmittedResponse;
 use SaveColombia\AlegraApiPsr\Eventos\Responses\EventsListResponse;
 use SaveColombia\AlegraApiPsr\Eventos\Responses\FailedRequestResponse;
 use SaveColombia\AlegraApiPsr\Eventos\Responses\FileResponse;
+use SaveColombia\AlegraApiPsr\Eventos\Responses\ForbiddenErrorResponse;
 use SaveColombia\AlegraApiPsr\Eventos\Responses\ResourceNotFoundResponse;
 use SaveColombia\AlegraApiPsr\Eventos\Responses\ServerCommunicationErrorResponse;
 use SaveColombia\AlegraApiPsr\Eventos\Responses\ServerErrorResponse;
@@ -86,6 +87,7 @@ final class GestorEventos
             400     => $mapper->map(ValidationErrorResponse::class, $body),
             404     => $mapper->map(ResourceNotFoundResponse::class, $body),
             500     => $mapper->map(ServerErrorResponse::class, $body),
+            401     => $mapper->map(ForbiddenErrorResponse::class, $body),
             default => throw new \Exception("Se recibió un estado desconocido desde la API", 1)
         };
 
@@ -122,6 +124,7 @@ final class GestorEventos
             400     => $mapper->map(ValidationErrorResponse::class, $body),
             404     => $mapper->map(ResourceNotFoundResponse::class, $body),
             500     => $mapper->map(ServerErrorResponse::class, $body),
+            401     => $mapper->map(ForbiddenErrorResponse::class, $body),
             default => throw new \Exception("Se recibió un estado desconocido desde la API", 1)
         };
 
@@ -153,6 +156,7 @@ final class GestorEventos
             400     => $mapper->map(ValidationErrorResponse::class, $body),
             404     => $mapper->map(ResourceNotFoundResponse::class, $body),
             500     => $mapper->map(ServerErrorResponse::class, $body),
+            401     => $mapper->map(ForbiddenErrorResponse::class, $body),
             default => throw new \Exception("Se recibió un estado desconocido desde la API", 1)
         };
 
@@ -184,6 +188,7 @@ final class GestorEventos
             400     => $mapper->map(ValidationErrorResponse::class, $body),
             404     => $mapper->map(ResourceNotFoundResponse::class, $body),
             500     => $mapper->map(ServerErrorResponse::class, $body),
+            401     => $mapper->map(ForbiddenErrorResponse::class, $body),
             default => throw new \Exception("Se recibió un estado desconocido desde la API", 1)
         };
 
@@ -216,6 +221,7 @@ final class GestorEventos
             404     => $mapper->map(ResourceNotFoundResponse::class, $body),
             500     => $mapper->map(ServerErrorResponse::class, $body),
             503     => $mapper->map(ServerCommunicationErrorResponse::class, $body),
+            401     => $mapper->map(ForbiddenErrorResponse::class, $body),
             default => throw new \Exception("Se recibió un estado desconocido desde la API", 1)
         };
 

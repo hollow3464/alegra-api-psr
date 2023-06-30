@@ -6,6 +6,6 @@ use SaveColombia\AlegraApiPsr\Eventos\DataTypes\AlegraError;
 
 interface FailedRequestResponse
 {
-    /** @return array<AlegraError> */
+    /** @return array<AlegraError|string> */
     public function getErrors(): array;
 }
