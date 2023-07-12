@@ -14,6 +14,7 @@ use SaveColombia\AlegraApiPsr\Eventos\DataTypes\TipoArchivoEvento;
 use SaveColombia\AlegraApiPsr\Eventos\Payloads\EventoDian;
 use SaveColombia\AlegraApiPsr\Eventos\Payloads\EventoDianAttachedDocument;
 use SaveColombia\AlegraApiPsr\Eventos\Responses\AttachmentEventEmittedResponse;
+use SaveColombia\AlegraApiPsr\Eventos\Responses\DuplicateEventResponse;
 use SaveColombia\AlegraApiPsr\Eventos\Responses\EventEmittedResponse;
 use SaveColombia\AlegraApiPsr\Eventos\Responses\EventsListResponse;
 use SaveColombia\AlegraApiPsr\Eventos\Responses\FailedRequestResponse;
@@ -27,8 +28,8 @@ use SaveColombia\AlegraApiPsr\Exceptions\FailedRequestException;
 
 final class GestorEventos
 {
+    private string $basePath = "/e-provider/col/v1";
     private readonly string $endpoint;
-    private readonly string $basePath;
 
     public function __construct(
         private readonly ClientInterface $clientInterface,
@@ -47,7 +48,6 @@ final class GestorEventos
         }
 
         $this->endpoint = $endpoint;
-        $this->basePath = "/e-provider/col/v1";
     }
 
     private function setupPath(string $path): UriInterface
@@ -101,12 +101,27 @@ final class GestorEventos
                         'endpoint'      => '/events',
                         'response_body' => $body,
                         'response_code' => $res->getStatusCode(),
-                        'payload'       => $payload
                     ]
                 );
             }
 
             throw new \Exception("Se recibió un estado desconocido desde la API DIAN");
+        }
+
+        if ($response instanceof EventEmittedResponse) {
+            if (str_contains(
+                $response->event->governmentResponse->errorMessages[0] ?? '',
+                'Documento procesado anteriormente'
+            )) {
+                $response = new DuplicateEventResponse();
+            }
+        }
+
+        // AEP11005 - Duplicate Event DIAN Response Code
+        if ($response instanceof ValidationErrorResponse) {
+            if (($response->getErrors()[0] ?? null)?->code === 'AEP11005') {
+                $response = new DuplicateEventResponse();
+            }
         }
 
         if ($response instanceof FailedRequestResponse) {
@@ -117,7 +132,6 @@ final class GestorEventos
                         'endpoint'      => '/events',
                         'response_body' => $body,
                         'response_code' => $res->getStatusCode(),
-                        'payload'       => $payload
                     ]
                 );
             }
@@ -166,12 +180,27 @@ final class GestorEventos
                         'endpoint'      => '/events/from-xml',
                         'response_body' => $body,
                         'response_code' => $res->getStatusCode(),
-                        'payload'       => $payload
                     ]
                 );
             }
 
             throw new \Exception("Se recibió un estado desconocido desde la API DIAN");
+        }
+
+        if ($response instanceof AttachmentEventEmittedResponse) {
+            if (str_contains(
+                $response->event->governmentResponse->errorMessages[0] ?? '',
+                'Documento procesado anteriormente'
+            )) {
+                $response = new DuplicateEventResponse();
+            }
+        }
+
+        // AEP11005 - Duplicate Event DIAN Response Code
+        if ($response instanceof ValidationErrorResponse) {
+            if (($response->getErrors()[0] ?? null)?->code === 'AEP11005') {
+                $response = new DuplicateEventResponse();
+            }
         }
 
         if ($response instanceof FailedRequestResponse) {
@@ -182,8 +211,6 @@ final class GestorEventos
                         'endpoint'      => '/events/from-xml',
                         'response_body' => $body,
                         'response_code' => $res->getStatusCode(),
-                        'payload'       => $payload
-
                     ]
                 );
             }
