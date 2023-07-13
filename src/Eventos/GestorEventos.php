@@ -109,10 +109,16 @@ final class GestorEventos
         }
 
         if ($response instanceof EventEmittedResponse) {
-            if (str_contains(
-                $response->event->governmentResponse->errorMessages[0] ?? '',
-                'Documento procesado anteriormente'
-            )) {
+            if (
+                str_contains(
+                    $response->event->governmentResponse->errorMessages[0] ?? '',
+                    'Documento procesado anteriormente'
+                ) ||
+                str_contains(
+                    $response->event->governmentResponse->errorMessages[0] ?? '',
+                    'LGC01'
+                )
+            ) {
                 $response = new DuplicateEventResponse();
             }
         }
@@ -188,10 +194,16 @@ final class GestorEventos
         }
 
         if ($response instanceof AttachmentEventEmittedResponse) {
-            if (str_contains(
-                $response->event->governmentResponse->errorMessages[0] ?? '',
-                'Documento procesado anteriormente'
-            )) {
+            if (
+                str_contains(
+                    $response->event->governmentResponse->errorMessages[0] ?? '',
+                    'Documento procesado anteriormente'
+                ) ||
+                str_contains(
+                    $response->event->governmentResponse->errorMessages[0] ?? '',
+                    'LGC01'
+                )
+            ) {
                 $response = new DuplicateEventResponse();
             }
         }
