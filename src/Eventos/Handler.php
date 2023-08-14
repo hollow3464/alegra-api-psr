@@ -26,7 +26,7 @@ use SaveColombia\AlegraApiPsr\Eventos\Responses\ServerErrorResponse;
 use SaveColombia\AlegraApiPsr\Eventos\Responses\ValidationErrorResponse;
 use SaveColombia\AlegraApiPsr\Exceptions\FailedRequestException;
 
-final class GestorEventos
+final class Handler
 {
     private string $basePath = "/e-provider/col/v1";
     private readonly string $endpoint;
@@ -64,7 +64,7 @@ final class GestorEventos
         return $request->withHeader('Authorization', "Bearer {$this->token}");
     }
 
-    public function emitirEventoFacturaElectronica(EventoDian $evento): EventEmittedResponse
+    public function emitirEvento(EventoDian $evento): EventEmittedResponse
     {
         $payload = (string) json_encode($evento, JSON_THROW_ON_ERROR);
 
@@ -148,7 +148,7 @@ final class GestorEventos
         return $response;
     }
 
-    public function emitirEventoFacturaElectronicaAttachedDocument(
+    public function emitirEventoAttachedDocument(
         EventoDianAttachedDocument $evento
     ): AttachmentEventEmittedResponse {
         $payload = (string) json_encode($evento, JSON_THROW_ON_ERROR);
@@ -233,7 +233,7 @@ final class GestorEventos
         return $response;
     }
 
-    public function consultarEventoFacturaElectronica(string $id): EventEmittedResponse
+    public function consultarEvento(string $id): EventEmittedResponse
     {
         $mapper = $this->mapperBuilder
             ->allowSuperfluousKeys()
@@ -265,7 +265,7 @@ final class GestorEventos
         return $response;
     }
 
-    public function obtenerArchivoEventoFacturaElectronica(string $id, TipoArchivoEvento $tipo): FileResponse
+    public function obtenerArchivoEvento(string $id, TipoArchivoEvento $tipo): FileResponse
     {
         $mapper = $this->mapperBuilder
             ->allowSuperfluousKeys()
@@ -297,7 +297,7 @@ final class GestorEventos
         return $response;
     }
 
-    public function consultarEventosFacturaElectronicaCufe(string $cufe): EventsListResponse
+    public function consultarEventos(string $cufe): EventsListResponse
     {
         $mapper = $this->mapperBuilder
             ->allowSuperfluousKeys()

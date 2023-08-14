@@ -11,21 +11,22 @@ use JsonSerializable;
 final class IssuerParty implements JsonSerializable
 {
     /**
-     * @param IdentificationType $identificationType Tipo de identificador fiscal
-     * @param string $identificationNumber Número de identificación de la persona
-     * @param string $firstName Nombre de la persona que recibió la factura o los bienes y/o servicios
-     * @param string $familyName Apellido de la persona que recibió la factura o los bienes y/o servicios
-     * @param string $jobTitle Cargo de la persona que recibió la factura o los bienes y/o servicios
-     * @param string $organizationDepartment Area, sección o departamento de la persona que recibió la factura o los bienes y/o servicios
+     * @param ?IdentificationType $identificationType Tipo de identificador fiscal
+     * @param ?string $identificationNumber Número de identificación de la persona
+     * @param ?string $firstName Nombre de la persona que recibió la factura o los bienes y/o servicios
+     * @param ?string $familyName Apellido de la persona que recibió la factura o los bienes y/o servicios
+     * @param ?string $jobTitle Cargo de la persona que recibió la factura o los bienes y/o servicios
+     * @param ?string $organizationDepartment Area, sección o departamento de la persona que recibió la factura o los bienes y/o servicios
      * @param ?string $dv Requerido si el tipo de identificador es 31 equivalente a NIT
      */
     public function __construct(
-        public readonly IdentificationType $identificationType,
-        public readonly string $identificationNumber,
-        public readonly string $firstName,
-        public readonly string $familyName,
-        public readonly string $jobTitle,
-        public readonly string $organizationDepartment,
+        public readonly ?IdentificationType $identificationType,
+        public readonly ?string $identificationNumber,
+        public readonly ?string $firstName,
+        public readonly ?string $familyName,
+        public readonly ?string $jobTitle,
+        public readonly ?string $organizationDepartment,
+        public readonly ?string $name = null,
         public readonly ?string $dv = null,
     ) {
         if ($identificationType === IdentificationType::NIT && !$dv) {
@@ -38,7 +39,7 @@ final class IssuerParty implements JsonSerializable
     public function jsonSerialize(): mixed
     {
         $self = [
-            'identificationType'     => $this->identificationType->value,
+            'identificationType'     => $this->identificationType?->value,
             'identificationNumber'   => $this->identificationNumber,
             'firstName'              => $this->firstName,
             'familyName'             => $this->familyName,
@@ -48,6 +49,10 @@ final class IssuerParty implements JsonSerializable
 
         if ($this->dv) {
             $self['dv'] = $this->dv;
+        }
+
+        if ($this->name) {
+            $self['name'] = $this->name;
         }
 
         return $self;
