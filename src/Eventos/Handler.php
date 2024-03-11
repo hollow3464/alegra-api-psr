@@ -169,14 +169,22 @@ final class Handler
 
         $body = json_decode($res->getBody(), true, flags: JSON_THROW_ON_ERROR);
 
-        $response = match ($res->getStatusCode()) {
-            200, 201 => $mapper->map(AttachmentEventEmittedResponse::class, $body),
-            400     => $mapper->map(ValidationErrorResponse::class, $body),
-            404     => $mapper->map(ResourceNotFoundResponse::class, $body),
-            500     => $mapper->map(ServerErrorResponse::class, $body),
-            401     => $mapper->map(ForbiddenErrorResponse::class, $body),
-            default => null
-        };
+        $mapErrors = [];
+        $response = null;
+        try {
+            $response = match ($res->getStatusCode()) {
+                200, 201 => $mapper->map(AttachmentEventEmittedResponse::class, $body),
+                400     => $mapper->map(ValidationErrorResponse::class, $body),
+                404     => $mapper->map(ResourceNotFoundResponse::class, $body),
+                500     => $mapper->map(ServerErrorResponse::class, $body),
+                401     => $mapper->map(ForbiddenErrorResponse::class, $body),
+                default => null
+            };
+        } catch (\CuyZ\Valinor\Mapper\MappingError $e) {
+            foreach ($e->node()->messages() as $messages) {
+                $mapErrors[] = $messages->body();
+            }
+        }
 
         if (!$response) {
             if ($this->logger) {
@@ -186,6 +194,7 @@ final class Handler
                         'endpoint'      => '/events/from-xml',
                         'response_body' => $body,
                         'response_code' => $res->getStatusCode(),
+                        'map_errors' => $mapErrors
                     ]
                 );
             }
