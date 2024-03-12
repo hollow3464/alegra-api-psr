@@ -205,17 +205,15 @@ final class Handler
         }
 
         if ($response instanceof AttachmentEventEmittedResponse) {
-            if (
-                str_contains(
-                    $response->event->governmentResponse->errorMessages[0] ?? '',
-                    'Documento procesado anteriormente'
-                ) ||
-                str_contains(
-                    $response->event->governmentResponse->errorMessages[0] ?? '',
-                    'LGC01'
-                )
-            ) {
-                $response = new DuplicateEventResponse();
+            $errMessages = $response->event->governmentResponse->errorMessages;
+            foreach ($errMessages as $err) {
+                if (
+                    str_contains($err, 'Documento procesado anteriormente') ||
+                    str_contains($err, 'LGC01')
+                ) {
+                    $response = new DuplicateEventResponse();
+                    break;
+                }
             }
         }
 
