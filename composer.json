@@ -2,7 +2,7 @@
     "name": "hollow3464/alegra-api-psr",
     "description": "Librería PSR para la integración de la API de Alegra",
     "type": "library",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "scripts": {
         "format": "vendor/bin/pint",
         "lint": "vendor/bin/phpstan"

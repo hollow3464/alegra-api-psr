@@ -5,7 +5,9 @@ namespace Hollow3464\Alegra\Eventos;
 use CuyZ\Valinor\MapperBuilder;
 use CuyZ\Valinor\Mapper\MappingError;
 use CuyZ\Valinor\Mapper\TreeMapper;
+use Hollow3464\Alegra\Eventos\DataTypes\LegalStatus;
 use Hollow3464\Alegra\Exceptions\DuplicateEventException;
+use Hollow3464\Alegra\Exceptions\RejectedEventException;
 use Hollow3464\Alegra\Exceptions\UnhandledResponseMappingException;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
@@ -151,6 +153,14 @@ final class EventosHandler
             );
         }
 
+        if ($response->event->legalStatus == LegalStatus::REJECTED) {
+            throw new RejectedEventException(
+                response:$response,
+                responseBody: $body,
+                statusCode: $res->getStatusCode(),
+            );
+        }
+
         return $response;
     }
 
@@ -227,6 +237,14 @@ final class EventosHandler
                 responseBody: $body,
                 statusCode: $res->getStatusCode(),
                 endpoint: '/events/from-xml',
+            );
+        }
+
+        if ($response->event->legalStatus == LegalStatus::REJECTED) {
+            throw new RejectedEventException(
+                response:$response,
+                responseBody: $body,
+                statusCode: $res->getStatusCode(),
             );
         }
 
