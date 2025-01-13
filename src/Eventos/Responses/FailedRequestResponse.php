@@ -1,8 +1,8 @@
 <?php
 
-namespace SaveColombia\AlegraApiPsr\Eventos\Responses;
+namespace Hollow3464\Alegra\Eventos\Responses;
 
-use SaveColombia\AlegraApiPsr\Eventos\DataTypes\AlegraError;
+use Hollow3464\Alegra\Eventos\DataTypes\AlegraError;
 
 interface FailedRequestResponse
 {

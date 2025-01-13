@@ -1,6 +1,6 @@
 <?php
 
-namespace SaveColombia\AlegraApiPsr\Eventos\DataTypes;
+namespace Hollow3464\Alegra\Eventos\DataTypes;
 
 enum LegalStatus: string
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace SaveColombia\AlegraApiPsr\Eventos\Responses;
+namespace Hollow3464\Alegra\Eventos\Responses;
 
-use SaveColombia\AlegraApiPsr\Eventos\DataTypes\EmmitedEvent;
+use Hollow3464\Alegra\Eventos\DataTypes\EmmitedEvent;
 
 final class EventEmittedResponse
 {

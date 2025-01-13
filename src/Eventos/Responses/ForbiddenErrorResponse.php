@@ -1,6 +1,6 @@
 <?php
 
-namespace SaveColombia\AlegraApiPsr\Eventos\Responses;
+namespace Hollow3464\Alegra\Eventos\Responses;
 
 final class ForbiddenErrorResponse implements FailedRequestResponse
 {

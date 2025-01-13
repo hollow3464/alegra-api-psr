@@ -1,5 +1,5 @@
 {
-    "name": "save-colombia/alegra_api_psr",
+    "name": "hollow3464/alegra-api-psr",
     "description": "Librería PSR para la integración de la API de Alegra",
     "type": "library",
     "version": "1.0",
@@ -9,13 +9,13 @@
     },
     "autoload": {
         "psr-4": {
-            "SaveColombia\\AlegraApiPsr\\": "src/"
+            "Hollow3464\\Alegra\\": "src/"
         }
     },
     "authors": [
         {
             "name": "David Chamorro",
-            "email": "soporte@savecol.com"
+            "email": "daved3464@gmail.com"
         }
     ],
     "require": {
@@ -32,6 +32,7 @@
         "laravel/pint": "^1.10"
     },
     "config": {
+        "sort-packages": true,
         "allow-plugins": {
             "phpstan/extension-installer": true
         }

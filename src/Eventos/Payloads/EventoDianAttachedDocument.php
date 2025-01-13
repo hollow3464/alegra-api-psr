@@ -1,13 +1,13 @@
 <?php
 
-namespace SaveColombia\AlegraApiPsr\Eventos\Payloads;
+namespace Hollow3464\Alegra\Eventos\Payloads;
 
 use JsonSerializable;
-use SaveColombia\AlegraApiPsr\Eventos\DataTypes\ClaimCode;
-use SaveColombia\AlegraApiPsr\Eventos\DataTypes\Email;
-use SaveColombia\AlegraApiPsr\Eventos\DataTypes\EventCompany;
-use SaveColombia\AlegraApiPsr\Eventos\DataTypes\IssuerParty;
-use SaveColombia\AlegraApiPsr\Eventos\DataTypes\TipoEventoDian;
+use Hollow3464\Alegra\Eventos\DataTypes\ClaimCode;
+use Hollow3464\Alegra\Eventos\DataTypes\Email;
+use Hollow3464\Alegra\Eventos\DataTypes\EventCompany;
+use Hollow3464\Alegra\Eventos\DataTypes\IssuerParty;
+use Hollow3464\Alegra\Eventos\DataTypes\TipoEventoDian;
 
 final class EventoDianAttachedDocument implements JsonSerializable
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace SaveColombia\AlegraApiPsr\Exceptions;
+namespace Hollow3464\Alegra\Exceptions;
 
 final class ServiceUnavailableException extends \Exception
 {
