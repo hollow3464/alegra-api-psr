@@ -31,6 +31,7 @@ final class EventosHandler
 {
     private string $basePath = "/e-provider/col/v1";
     private readonly string $endpoint;
+    private readonly TreeMapper $mapper;
 
     public function __construct(
         private readonly ClientInterface $clientInterface,
@@ -39,15 +40,18 @@ final class EventosHandler
         private readonly StreamFactoryInterface $streamFactory,
         private readonly MapperBuilder $mapperBuilder,
         private readonly string $token = '',
-        private readonly ?TreeMapper $mapper = null,
+        ?TreeMapper $mapper = null,
         bool $testing = true,
     ) {
-        if ($this->mapper === null) {
+        if ($mapper === null) {
             $this->mapper = $this->mapperBuilder
                 ->allowSuperfluousKeys()
                 ->enableFlexibleCasting()
                 ->mapper();
+        } else {
+            $this->mapper = $mapper;
         }
+
         $endpoint = "https://sandbox-api.alegra.com";
         if (!$testing) {
             $endpoint = "https://api.alegra.com";
@@ -141,9 +145,9 @@ final class EventosHandler
         if ($response instanceof FailedRequestResponse) {
             throw new FailedRequestException(
                 response: $response,
-                endpoint: '/events',
-                body: $body,
+                responseBody: $body,
                 statusCode: $res->getStatusCode(),
+                endpoint: '/events',
             );
         }
 
@@ -266,7 +270,12 @@ final class EventosHandler
         }
 
         if ($response instanceof FailedRequestResponse) {
-            throw new FailedRequestException($response);
+            throw new FailedRequestException(
+                response:$response,
+                responseBody: $body,
+                statusCode: $res->getStatusCode(),
+                endpoint: '/events/{id}',
+            );
         }
 
         return $response;
@@ -305,7 +314,12 @@ final class EventosHandler
         }
 
         if ($response instanceof FailedRequestResponse) {
-            throw new FailedRequestException($response);
+            throw new FailedRequestException(
+                response:$response,
+                responseBody: $body,
+                statusCode: $res->getStatusCode(),
+                endpoint: '/events/invoice/{cufe}',
+            );
         }
 
         return $response;
