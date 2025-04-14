@@ -2,7 +2,8 @@
 
 namespace Hollow3464\Alegra\Exceptions;
 
-final class RejectedEventException extends \Exception {
+final class RejectedEventException extends \Exception
+{
     public function __construct(
         public readonly mixed $response,
         public readonly mixed $responseBody,
@@ -11,4 +12,3 @@ final class RejectedEventException extends \Exception {
         parent::__construct("El evento ya fue emitido");
     }
 }
-

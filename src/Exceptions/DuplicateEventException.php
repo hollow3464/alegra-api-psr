@@ -2,7 +2,8 @@
 
 namespace Hollow3464\Alegra\Exceptions;
 
-final class DuplicateEventException extends \Exception {
+final class DuplicateEventException extends \Exception
+{
     public function __construct(
         public readonly mixed $response,
         public readonly mixed $responseBody,
