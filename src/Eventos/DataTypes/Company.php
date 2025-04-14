@@ -2,13 +2,11 @@
 
 namespace Hollow3464\Alegra\Eventos\DataTypes;
 
-use JsonSerializable;
-
 /**
  * Detalles de la organización que emite el evento,
  * en caso de omitir este objeto se usará la compañia principal asociada al usuario
  */
-final class Company implements JsonSerializable
+final readonly class Company implements \JsonSerializable
 {
     /**
      * @param string $id
@@ -49,14 +47,14 @@ final class Company implements JsonSerializable
      * DV del NIT del emisor. Es obligatorio si identificationType = 31
      */
     public function __construct(
-        public readonly string $id,
-        public readonly OrganizationType $organizationType,
-        public readonly IdentificationType $identificationType,
-        public readonly string $identificationNumber,
-        public readonly string $name,
-        public readonly RegimeCode $regimeCode,
-        public readonly TaxCode $taxCode,
-        public readonly ?string $dv = null,
+        public string $id,
+        public ?OrganizationType $organizationType = null,
+        public ?IdentificationType $identificationType = null,
+        public ?string $identificationNumber = null,
+        public ?string $name = null,
+        public ?RegimeCode $regimeCode = null,
+        public ?TaxCode $taxCode = null,
+        public ?string $dv = null,
     ) {
         if ($identificationType === IdentificationType::NIT && !$dv) {
             throw new \Exception(
@@ -67,20 +65,8 @@ final class Company implements JsonSerializable
 
     public function jsonSerialize(): mixed
     {
-        $self = [
-            'id'                   => $this->id,
-            'organizationType'     => $this->organizationType->value,
-            'identificationType'   => $this->identificationType->value,
-            'identificationNumber' => $this->identificationNumber,
-            'name'                 => $this->name,
-            'regimeCode'           => $this->regimeCode->value,
-            'taxCode'              => $this->taxCode->value
-        ];
+        $self = (array) $this;
 
-        if ($this->dv) {
-            $self['dv'] = $this->dv;
-        }
-
-        return $self;
+        return array_values(array_filter($self, fn ($value) => $value !== null));
     }
 }
