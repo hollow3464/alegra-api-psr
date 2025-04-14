@@ -66,7 +66,6 @@ final readonly class Company implements \JsonSerializable
     public function jsonSerialize(): mixed
     {
         $self = (array) $this;
-
-        return array_values(array_filter($self, fn ($value) => $value !== null));
+        return array_filter($self, fn ($value) => $value !== null);
     }
 }
