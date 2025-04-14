@@ -2,7 +2,7 @@
 
 namespace Hollow3464\Alegra\Exceptions;
 
-final class RejectedEventException extends \Exception
+final class RejectedEventException extends HandlerException
 {
     public function __construct(
         public readonly mixed $response,

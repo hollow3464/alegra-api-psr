@@ -2,10 +2,9 @@
 
 namespace Hollow3464\Alegra\Exceptions;
 
-use Exception;
 use Hollow3464\Alegra\Eventos\Responses\FailedRequestResponse;
 
-final class FailedRequestException extends Exception
+final class FailedRequestException extends HandlerException
 {
     public function __construct(
         public readonly FailedRequestResponse $response,

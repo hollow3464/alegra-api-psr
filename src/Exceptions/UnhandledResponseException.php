@@ -2,7 +2,7 @@
 
 namespace Hollow3464\Alegra\Exceptions;
 
-final class UnhandledResponseException extends \Exception
+final class UnhandledResponseException extends HandlerException
 {
     public function __construct(
         public readonly mixed $responseBody,

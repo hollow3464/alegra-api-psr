@@ -2,7 +2,7 @@
 
 namespace Hollow3464\Alegra\Exceptions;
 
-final class ServiceUnavailableException extends \Exception
+final class ServiceUnavailableException extends HandlerException
 {
     public function __construct()
     {

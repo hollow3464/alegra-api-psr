@@ -4,7 +4,7 @@ namespace Hollow3464\Alegra\Exceptions;
 
 use CuyZ\Valinor\Mapper\MappingError;
 
-final class UnhandledResponseMappingException extends \Exception
+final class UnhandledResponseMappingException extends HandlerException
 {
     public function __construct(
         public readonly mixed $responseBody,
