@@ -69,9 +69,15 @@ final class ReceiverParty implements JsonSerializable
             'organizationType'     => $this->organizationType?->value,
             'identificationNumber' => $this->identificationNumber,
             'identificationType'   => $this->identificationType?->value,
-            'regimeCode'           => $this->regimeCode?->value ?? '',
-            'taxCode'              => $this->taxCode?->value ?? ''
         ];
+
+        if ($this->regimeCode) {
+            $self['regimeCode'] = $this->regimeCode->value;
+        }
+
+        if ($this->taxCode) {
+            $self['taxCode'] = $this->taxCode->value;
+        }
 
         if ($this->dv) {
             $self['dv'] = $this->dv;
