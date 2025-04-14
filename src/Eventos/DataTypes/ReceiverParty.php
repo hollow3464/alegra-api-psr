@@ -7,7 +7,7 @@ use JsonSerializable;
 /**
  * Persona o entidad que recibe el evento, necesaria en todos los eventos a excepción de Aceptación Tácita (034)
  */
-final readonly class ReceiverParty implements JsonSerializable
+final class ReceiverParty implements JsonSerializable
 {
     /**
      * @param ?string $name
@@ -26,7 +26,7 @@ final readonly class ReceiverParty implements JsonSerializable
      * Tipo de documento de identificación del receptor.
      * Se debe colocar el Código que corresponda de la tabla de tipos de identificación de la DIAN
      *
-     * @param RegimeCode $regimeCode
+     * @param ?RegimeCode $regimeCode
      * Régimen al que pertenece el Emisor.
      * Gran contribuyente (O-13).
      * Autorretenedor (O-15).
@@ -34,7 +34,7 @@ final readonly class ReceiverParty implements JsonSerializable
      * Régimen simple de tributación (O-47).
      * No aplica - Otros (R-99-PN)
      *
-     * @param TaxCode $taxCode
+     * @param ?TaxCode $taxCode
      * Código tipo de impuesto según los códigos de la tabla de la DIAN.
      * IVA (01).
      * INC (04).
@@ -46,13 +46,13 @@ final readonly class ReceiverParty implements JsonSerializable
      * DV del NIT del receptor. Es obligatorio si idNumberType = 31
      */
     public function __construct(
-        public ?string $name,
-        public ?OrganizationType $organizationType,
-        public ?string $identificationNumber,
-        public ?IdentificationType $identificationType,
-        public RegimeCode $regimeCode,
-        public TaxCode $taxCode,
-        public ?string $dv = null,
+        public readonly ?string $name,
+        public readonly ?OrganizationType $organizationType,
+        public readonly ?string $identificationNumber,
+        public readonly ?IdentificationType $identificationType,
+        public readonly ?RegimeCode $regimeCode,
+        public readonly ?TaxCode $taxCode,
+        public readonly ?string $dv = null,
     ) {
         if ($identificationType === IdentificationType::NIT && !$dv) {
             throw new \Exception(
@@ -69,8 +69,8 @@ final readonly class ReceiverParty implements JsonSerializable
             'organizationType'     => $this->organizationType?->value,
             'identificationNumber' => $this->identificationNumber,
             'identificationType'   => $this->identificationType?->value,
-            'regimeCode'           => $this->regimeCode->value,
-            'taxCode'              => $this->taxCode->value,
+            'regimeCode'           => $this->regimeCode?->value ?? '',
+            'taxCode'              => $this->taxCode?->value ?? ''
         ];
 
         if ($this->dv) {
