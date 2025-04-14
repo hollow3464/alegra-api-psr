@@ -2,14 +2,12 @@
 
 namespace Hollow3464\Alegra\Eventos\DataTypes;
 
-use DateTimeInterface;
-
 final class AttachmentEmmitedEvent
 {
     public function __construct(
         public readonly string $id,
         public readonly EventType $type,
-        public readonly DateTimeInterface $date,
+        public readonly string $date,
         public readonly LegalStatus $legalStatus,
         public readonly string $companyIdentification,
         public readonly string $cude,

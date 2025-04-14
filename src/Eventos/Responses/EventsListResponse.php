@@ -2,7 +2,6 @@
 
 namespace Hollow3464\Alegra\Eventos\Responses;
 
-use DateTimeInterface;
 use Hollow3464\Alegra\Eventos\DataTypes\EventListEvent;
 use Hollow3464\Alegra\Eventos\DataTypes\EventStatus;
 use Hollow3464\Alegra\Eventos\DataTypes\EventType;
@@ -23,7 +22,7 @@ final class EventsListResponse
         public readonly ?array $errorMessages = [],
         public readonly ?array $events = [],
         public readonly ?EventType $type = null,
-        public readonly ?DateTimeInterface $date = null,
+        public readonly ?string $date = null,
         public readonly ?LegalStatus $legalStatus = null,
         public readonly ?int $companyIdentification = null,
         public readonly ?string $cufe = null,
