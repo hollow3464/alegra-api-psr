@@ -75,12 +75,12 @@ final class EventosHandler
     }
 
     /**
-    * @throws ServiceUnavailableException
-    * @throws UnhandledResponseException
-    * @throws UnhandledResponseMappingException
-    * @throws DuplicateEventException
-    * @throws FailedRequestException
-    */
+     * @throws ServiceUnavailableException
+     * @throws UnhandledResponseException
+     * @throws UnhandledResponseMappingException
+     * @throws DuplicateEventException
+     * @throws FailedRequestException
+     */
     public function emitirEvento(EventoDian $evento): EventEmittedResponse
     {
         $payload = (string) json_encode($evento, JSON_THROW_ON_ERROR);
@@ -97,7 +97,7 @@ final class EventosHandler
 
         try {
             $response = match ($res->getStatusCode()) {
-                200,201 => $this->mapper->map(EventEmittedResponse::class, $body),
+                200, 201 => $this->mapper->map(EventEmittedResponse::class, $body),
                 400     => $this->mapper->map(ValidationErrorResponse::class, $body),
                 401     => $this->mapper->map(ForbiddenErrorResponse::class, $body),
                 404     => $this->mapper->map(ResourceNotFoundResponse::class, $body),
@@ -113,14 +113,8 @@ final class EventosHandler
         if ($response instanceof EventEmittedResponse) {
             foreach ($response->event->governmentResponse->errorMessages as $errorMessage) {
                 if (
-                    str_contains(
-                        $response->event->governmentResponse->errorMessages[0] ?? '',
-                        'Documento procesado anteriormente'
-                    ) ||
-                    str_contains(
-                        $response->event->governmentResponse->errorMessages[0] ?? '',
-                        'LGC01'
-                    )
+                    str_contains($errorMessage, 'Documento procesado anteriormente') ||
+                    str_contains($errorMessage, 'LGC01')
                 ) {
                     throw new DuplicateEventException(
                         response: $response,
@@ -155,7 +149,7 @@ final class EventosHandler
 
         if ($response->event->legalStatus == LegalStatus::REJECTED) {
             throw new RejectedEventException(
-                response:$response,
+                response: $response,
                 responseBody: $body,
                 statusCode: $res->getStatusCode(),
             );
@@ -166,12 +160,12 @@ final class EventosHandler
 
 
     /**
-    * @throws ServiceUnavailableException
-    * @throws UnhandledResponseException
-    * @throws UnhandledResponseMappingException
-    * @throws DuplicateEventException
-    * @throws FailedRequestException
-    */
+     * @throws ServiceUnavailableException
+     * @throws UnhandledResponseException
+     * @throws UnhandledResponseMappingException
+     * @throws DuplicateEventException
+     * @throws FailedRequestException
+     */
     public function emitirEventoAttachedDocument(
         EventoDianAttachedDocument $evento
     ): AttachmentEventEmittedResponse {
@@ -242,7 +236,7 @@ final class EventosHandler
 
         if ($response->event->legalStatus == LegalStatus::REJECTED) {
             throw new RejectedEventException(
-                response:$response,
+                response: $response,
                 responseBody: $body,
                 statusCode: $res->getStatusCode(),
             );
@@ -252,18 +246,13 @@ final class EventosHandler
     }
 
     /**
-    * @throws ServiceUnavailableException
-    * @throws UnhandledResponseException
-    * @throws UnhandledResponseMappingException
-    * @throws FailedRequestException
-    */
+     * @throws ServiceUnavailableException
+     * @throws UnhandledResponseException
+     * @throws UnhandledResponseMappingException
+     * @throws FailedRequestException
+     */
     public function consultarEvento(string $id): EventEmittedResponse
     {
-        $mapper = $this->mapperBuilder
-            ->allowSuperfluousKeys()
-            ->enableFlexibleCasting()
-            ->mapper();
-
         $req = $this->addAuthToken(
             $this->requestFactory
                 ->createRequest('GET', $this->setupPath("events/{$id}"))
@@ -289,7 +278,7 @@ final class EventosHandler
 
         if ($response instanceof FailedRequestResponse) {
             throw new FailedRequestException(
-                response:$response,
+                response: $response,
                 responseBody: $body,
                 statusCode: $res->getStatusCode(),
                 endpoint: '/events/{id}',
@@ -300,14 +289,13 @@ final class EventosHandler
     }
 
     /**
-    * @throws ServiceUnavailableException
-    * @throws UnhandledResponseException
-    * @throws UnhandledResponseMappingException
-    * @throws FailedRequestException
-    */
+     * @throws ServiceUnavailableException
+     * @throws UnhandledResponseException
+     * @throws UnhandledResponseMappingException
+     * @throws FailedRequestException
+     */
     public function consultarEventos(string $cufe): EventsListResponse
     {
-
         $req = $this->addAuthToken(
             $this->requestFactory
                 ->createRequest('GET', $this->setupPath("events/invoice/{$cufe}"))
@@ -333,7 +321,7 @@ final class EventosHandler
 
         if ($response instanceof FailedRequestResponse) {
             throw new FailedRequestException(
-                response:$response,
+                response: $response,
                 responseBody: $body,
                 statusCode: $res->getStatusCode(),
                 endpoint: '/events/invoice/{cufe}',
