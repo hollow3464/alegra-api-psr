@@ -54,7 +54,10 @@ final class ReceiverParty implements JsonSerializable
         public readonly ?TaxCode $taxCode,
         public readonly ?string $dv = null,
     ) {
-        if ($identificationType === IdentificationType::NIT && !$dv) {
+        if (
+            $identificationType === IdentificationType::NIT &&
+            (is_null($dv) || $dv === '')
+        ) {
             throw new \Exception(
                 "El DV es obligatorio para el tipo de identificación 31,
                 equivalente a NIT"
@@ -79,7 +82,7 @@ final class ReceiverParty implements JsonSerializable
             $self['taxCode'] = $this->taxCode->value;
         }
 
-        if ($this->dv) {
+        if (!is_null($this->dv) && $this->dv !== '') {
             $self['dv'] = $this->dv;
         }
 
