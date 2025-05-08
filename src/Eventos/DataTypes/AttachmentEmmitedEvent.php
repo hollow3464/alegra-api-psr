@@ -15,9 +15,9 @@ final class AttachmentEmmitedEvent
         public readonly Receiver $receiver,
         public readonly string $number,
         public readonly GovernmentResponse $governmentResponse,
-        public readonly string $xmlFileName,
-        public readonly string $zipFileName,
         public readonly EventStatus $status,
+        public readonly ?string $xmlFileName = null,
+        public readonly ?string $zipFileName = null,
         public readonly ?string $fullNumber = null,
         public readonly ?string $prefix = null,
     ) {
