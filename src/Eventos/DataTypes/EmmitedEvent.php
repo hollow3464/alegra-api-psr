@@ -14,13 +14,12 @@ final class EmmitedEvent
         public readonly string $cude,
         public readonly string $associatedDocumentId,
         public readonly Receiver $receiver,
-        public readonly ?string $prefix,
         public readonly string $number,
-        public readonly ?string $fullNumber,
-        public readonly GovernmentResponse $governmentResponse,
-        public readonly string $xmlFileName,
-        public readonly ?string $pdfFileName,
         public readonly EventStatus $status,
-    ) {
-    }
+        public readonly GovernmentResponse $governmentResponse,
+        public readonly ?string $prefix = null,
+        public readonly ?string $fullNumber = null,
+        public readonly ?string $xmlFileName = null,
+        public readonly ?string $pdfFileName = null,
+    ) {}
 }
