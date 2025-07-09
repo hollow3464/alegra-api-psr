@@ -45,14 +45,16 @@ final class EventosHandler
         ?TreeMapper $mapper = null,
         bool $testing = true,
     ) {
-        if ($mapper === null) {
-            $this->mapper = $this->mapperBuilder
+        if (!$mapper) {
+            $mapper = $this->mapperBuilder
+                ->allowScalarValueCasting()
+                ->allowNonSequentialList()
+                ->allowUndefinedValues()
                 ->allowSuperfluousKeys()
-                ->enableFlexibleCasting()
                 ->mapper();
-        } else {
-            $this->mapper = $mapper;
         }
+
+        $this->mapper = $mapper;
 
         $endpoint = "https://sandbox-api.alegra.com";
         if (!$testing) {
